@@ -267,8 +267,8 @@ header > input{
 
 .contatos ul li.ativo{
   background: #fff3f2;
-  animation: mudarCor .1s forwards;
-  animation-delay: 10s;
+  animation: mudarCor 0s forwards;
+  animation-delay: 10.05s;
 }
 
 @keyframes mudarCor {
