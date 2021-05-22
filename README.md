@@ -5,7 +5,7 @@
 </h4>
 
 ## :computer: Sobre o projeto
-Agenda digital de contatos com nome, e-mail e telefone. A busca por contatos é feita baseada no nome e é **case sensitive**, ou seja, diferencia caracteres maiúsculos de minúsculos.
+Agenda digital de contatos com nome, e-mail e telefone. A busca por contatos é feita baseada no nome e é **case sensitive**, ou seja, diferencia caracteres maiúsculos de minúsculos. O campo de busca retorna o contato ao pressionar o botão **enter**.
 
 ### Features
 
