@@ -14,7 +14,7 @@ Agenda digital de contatos com nome, e-mail e telefone. A busca por contatos é 
 - [x] editar contato
 - [x] buscar contatos
 
-## Rodando o site
+## Rodando o app
 
 ```bash
 # clone este repositório
