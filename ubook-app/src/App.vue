@@ -2,6 +2,7 @@
   <div id="app">
     <HeaderInicial />
     <Inicio />
+    <ModalCriar />
   </div>
 </template>
 
@@ -37,6 +38,39 @@ export default {
   justify-content: center;
   padding: 10px;
   cursor: pointer;
+}
+
+.btn-cancelar {
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: #fa7268;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 0.75rem;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  width: 80px;
+  outline: none;
+  border-radius: 15px;
+}
+
+.btn-salvar {
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: #f8f9fd;
+  background: #fa7268;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-family: Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 80px;
+  outline: none;
+  border-radius: 15px;
 }
 
 .cross {

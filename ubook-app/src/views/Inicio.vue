@@ -22,13 +22,12 @@ export default {
 main {
   display: flex;
   width: 100%;
-  height: 100vh;
   align-items: center;
   justify-content: center;
 }
 
 .painel-inicial {
-  padding-bottom: 150px;
+  padding: 100px 0px;
 }
 
 .painel-inicial div:first-child {
