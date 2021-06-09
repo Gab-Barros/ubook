@@ -15,6 +15,7 @@ Agenda de contatos, onde é possível adicionar contatos, excluir contatos, edit
 - [x] Buscar contatos. A busca ignora caracteres maiúsculos de minúsculos (é case insensitive)
 - [x] Contatos automaticamente ordenados em ordem alfabética.
 - [x] Highlight de 5s nos contatos criados.
+- [x] Contatos ficam salvos no navegador através do localStorage, de tal maneira que a agenda não é resetada ao atualizar a pagina ou fechá-la.
 
 ### 🛠 Tecnologias
 
