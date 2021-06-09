@@ -22,6 +22,7 @@ export default {
     fecharModal() {
       this.$store.commit("ATIVAR_MODAL", false);
     },
+    // verifica se o usuario clicou fora da modal e fecha a mesma em caso de afirmativo
     cliqueFora(e) {
       e.target === e.currentTarget ? this.fecharModal() : undefined;
     },
@@ -74,7 +75,7 @@ export default {
 }
 
 .modal.active {
-  animation: fade 0.5s forwards;
+  animation: fade 0.3s ease;
 }
 
 @keyframes fade {

@@ -1,5 +1,10 @@
 <template>
-  <section class="modal-container" @mousedown="cliqueFora">
+  <section
+    class="modal-container"
+    @mousedown="cliqueFora"
+    @keydown.enter="salvarContato"
+  >
+    <!--Adiciona classe para fade apenas se a modal existir-->
     <div class="modal" :class="{ active: $store.state.modal }">
       <p>Editar contato</p>
       <form>
@@ -18,8 +23,10 @@
           <button class="btn-cancelar" @click.prevent="fecharModal">
             Cancelar
           </button>
+
+          <!--Habilita o botão salvar apenas se o usuario preencher o nome E (email OU telefone)-->
           <button
-            v-if="contato.nome || contato.email || contato.telefone"
+            v-if="contato.nome && (contato.email || contato.telefone)"
             class="btn-salvar"
             @click.prevent="salvarContato"
           >
@@ -46,7 +53,11 @@ export default {
   name: "ModalEditar",
   data() {
     return {
-      contato: {},
+      contato: {
+        // gera uma cor aleatoria para o background do icone
+        bgColor: `hsl(${Math.floor(Math.random() * (360 - 0 + 1)) +
+          0}, 70%, 70%)`,
+      },
     };
   },
   computed: {
@@ -57,16 +68,23 @@ export default {
       this.$store.commit("ATIVAR_MODAL", false);
     },
     cliqueFora(e) {
+      // verifica se o usuario clicou fora da modal e fecha a mesma em caso de afirmativo
       e.target === e.currentTarget ? this.fecharModal() : undefined;
     },
     salvarContato() {
       this.$store.dispatch("salvarEdicao", this.contato);
+      // organiza automaticamente a array em ordem alfabetica
       this.contatos.sort((a, b) =>
-        a.nome > b.nome ? 1 : b.nome > a.nome ? -1 : 0
+        a.nome.toUpperCase() > b.nome.toUpperCase()
+          ? 1
+          : b.nome.toUpperCase() > a.nome.toUpperCase()
+          ? -1
+          : 0
       );
     },
   },
   created() {
+    // quando a modal de edição é criada, puxa automaticamente as informações do contato.
     this.contato.nome = this.contatos[this.index].nome;
     this.contato.email = this.contatos[this.index].email;
     this.contato.telefone = this.contatos[this.index].telefone;
@@ -120,7 +138,7 @@ export default {
 }
 
 .modal.active {
-  animation: fade 0.5s forwards;
+  animation: fade 0.3s ease;
 }
 
 @keyframes fade {

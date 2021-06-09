@@ -7,18 +7,54 @@
       <button class="btn" @click="ativarModal">criar contato</button>
     </div>
     <form>
-      <input type="text" placeholder="Buscar contato..." />
-      <input type="submit" id="lupa" value="Buscar Contato" @click.prevent />
+      <input
+        type="text"
+        placeholder="Buscar contato..."
+        v-model="busca"
+        @keydown.enter="buscar"
+      />
+      <input
+        type="submit"
+        id="lupa"
+        value="Buscar Contato"
+        @click.prevent="buscar"
+      />
     </form>
   </header>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  name: "HeaderInicial",
+  name: "HeaderContato",
+  data() {
+    return {
+      busca: "",
+    };
+  },
+  computed: {
+    ...mapState(["contatos"]),
+  },
   methods: {
     ativarModal() {
       this.$store.commit("ATIVAR_MODAL", "ModalCriar");
+    },
+    buscar() {
+      // Faz a busca do nome e retorna o index. Busca case-insensitive devido ao .toUpperCase()
+      const index = this.contatos.findIndex((contato) => {
+        if (contato.nome.toUpperCase() === this.busca.toUpperCase()) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      // Se achar o index (ou seja, index maior ou igual a zero), abre a tela de edição de contato.
+      // caso contrário, dá um alerta de contato não encontrado.
+      index >= 0
+        ? this.$store.dispatch("editarContato", index)
+        : window.alert("Contato não encontrado");
     },
   },
 };

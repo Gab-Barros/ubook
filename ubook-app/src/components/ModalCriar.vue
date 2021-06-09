@@ -1,5 +1,10 @@
 <template>
-  <section class="modal-container" @mousedown="cliqueFora">
+  <section
+    class="modal-container"
+    @mousedown="cliqueFora"
+    @keydown.enter="salvarContato"
+  >
+    <!--adiciona a classe active para o fade apenas se a modal existir-->
     <div class="modal" :class="{ active: $store.state.modal }">
       <p>Criar novo contato</p>
       <form>
@@ -18,8 +23,10 @@
           <button class="btn-cancelar" @click.prevent="fecharModal">
             Cancelar
           </button>
+
+          <!--Botão de salvar contato é habilitado apenas se o usuario preencher o nome E (email OU telefone)-->
           <button
-            v-if="contato.nome || contato.email || contato.telefone"
+            v-if="contato.nome && (contato.email || contato.telefone)"
             class="btn-salvar"
             @click.prevent="salvarContato"
           >
@@ -46,10 +53,13 @@ export default {
   name: "ModalCriar",
   data() {
     return {
-      contato: { 
+      contato: {
+        // o objeto contato vai com a prop highlight como true para dar o background inicial quando o contato é criado.
+        // gera uma cor aletoria para o background do icone e atribui a prop bgColor
         highlight: true,
-        bgColor: `hsl(${Math.floor(Math.random() * (360 - 0 + 1)) + 0}, 70%, 70%)`
-        },
+        bgColor: `hsl(${Math.floor(Math.random() * (360 - 0 + 1)) +
+          0}, 70%, 70%)`,
+      },
     };
   },
   computed: {
@@ -60,17 +70,24 @@ export default {
       this.$store.commit("ATIVAR_MODAL", false);
     },
     cliqueFora(e) {
+      // verifica se o usuario clicou fora da modal e fecha em caso de afirmativo.
       e.target === e.currentTarget ? this.fecharModal() : undefined;
     },
     salvarContato() {
       this.$store.dispatch("salvarContato", this.contato);
+      // depois de adicionar o contato, remove a classe highlight depois de 5 segundos.
       this.contatos.forEach((contato) => {
         setTimeout(() => {
           contato.highlight = false;
-        }, 10000);
+        }, 5000);
       });
+      //organiza automaticamente a array em ordem alfabética. toUpperCase() para comparar case-insensitive.
       this.contatos.sort((a, b) =>
-        a.nome > b.nome ? 1 : b.nome > a.nome ? -1 : 0
+        a.nome.toUpperCase() > b.nome.toUpperCase()
+          ? 1
+          : b.nome.toUpperCase() > a.nome.toUpperCase()
+          ? -1
+          : 0
       );
     },
   },
@@ -123,7 +140,7 @@ export default {
 }
 
 .modal.active {
-  animation: fade 0.5s forwards;
+  animation: fade 0.3s ease;
 }
 
 @keyframes fade {

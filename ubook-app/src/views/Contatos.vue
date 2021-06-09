@@ -10,8 +10,9 @@
         v-for="(contato, index) in $store.state.contatos"
         :key="index"
         class="contato"
-        :class="{ vermelho: contato.highlight }"
+        :class="{ highlightBg: contato.highlight }"
       >
+        <!--Ícone com a primeira letra do nome do contato-->
         <td>
           <span :style="{ background: contato.bgColor }" class="icone-nome">{{
             contato.nome.charAt(0).toUpperCase()
@@ -77,7 +78,7 @@ td {
 }
 
 .contato:hover {
-  background: #8ec1e6;
+  background: #cad7ed;
 }
 
 .telefone {
@@ -117,8 +118,8 @@ td {
   padding: 10px;
 }
 
-.vermelho {
-  background: #8ec1e6;
+.highlightBg {
+  background: #cad7ed;
 }
 
 .icone-nome {
