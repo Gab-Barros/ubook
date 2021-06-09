@@ -1,5 +1,5 @@
 <template>
-  <section class="modal-container" @click="cliqueFora">
+  <section class="modal-container" @mousedown="cliqueFora">
     <div class="modal" :class="{ active: $store.state.modal }">
       <p>Criar novo contato</p>
       <form>
@@ -18,7 +18,20 @@
           <button class="btn-cancelar" @click.prevent="fecharModal">
             Cancelar
           </button>
-          <button class="btn-salvar" @click.prevent="salvarContato">
+          <button
+            v-if="contato.nome || contato.email || contato.telefone"
+            class="btn-salvar"
+            @click.prevent="salvarContato"
+            disabled
+          >
+            Salvar
+          </button>
+          <button
+            v-else
+            class="btn-salvar btn-salvar-disabled"
+            @click.prevent="salvarContato"
+            disabled
+          >
             Salvar
           </button>
         </div>
@@ -79,6 +92,10 @@ export default {
   left: 0;
   bottom: 60px;
   margin: 10px 0;
+}
+
+.btn-salvar.btn-salvar-disabled {
+  opacity: 0.32;
 }
 
 .modal {
