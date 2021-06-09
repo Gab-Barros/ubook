@@ -76,8 +76,8 @@ export default {
   border-radius: 15px;
 }
 
-.btn-salvar {
-  background: none;
+.btn-salvar,
+.btn-excluir {
   border: none;
   font-size: 0.875rem;
   color: #f8f9fd;

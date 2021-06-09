@@ -51,6 +51,7 @@ header input {
   background-position: center center;
   position: absolute;
   top: 8px;
+  overflow: hidden;
   right: 15px;
   text-indent: -1000px;
   cursor: pointer;

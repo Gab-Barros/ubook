@@ -1,7 +1,7 @@
 <template>
   <section class="modal-container" @mousedown="cliqueFora">
     <div class="modal" :class="{ active: $store.state.modal }">
-      <p>Criar novo contato</p>
+      <p>Editar contato</p>
       <form>
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome" v-model="contato.nome" />
@@ -43,17 +43,14 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "ModalCriar",
+  name: "ModalEditar",
   data() {
     return {
-      contato: { 
-        highlight: true,
-        bgColor: `hsl(${Math.floor(Math.random() * (360 - 0 + 1)) + 0}, 70%, 70%)`
-        },
+      contato: {},
     };
   },
   computed: {
-    ...mapState(["contatos"]),
+    ...mapState(["contatos", "index"]),
   },
   methods: {
     fecharModal() {
@@ -63,16 +60,16 @@ export default {
       e.target === e.currentTarget ? this.fecharModal() : undefined;
     },
     salvarContato() {
-      this.$store.dispatch("salvarContato", this.contato);
-      this.contatos.forEach((contato) => {
-        setTimeout(() => {
-          contato.highlight = false;
-        }, 10000);
-      });
+      this.$store.dispatch("salvarEdicao", this.contato);
       this.contatos.sort((a, b) =>
         a.nome > b.nome ? 1 : b.nome > a.nome ? -1 : 0
       );
     },
+  },
+  created() {
+    this.contato.nome = this.contatos[this.index].nome;
+    this.contato.email = this.contatos[this.index].email;
+    this.contato.telefone = this.contatos[this.index].telefone;
   },
 };
 </script>

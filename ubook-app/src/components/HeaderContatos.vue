@@ -69,6 +69,7 @@ header input {
   top: 8px;
   right: 15px;
   text-indent: -1000px;
+  overflow: hidden;
   cursor: pointer;
 }
 </style>
