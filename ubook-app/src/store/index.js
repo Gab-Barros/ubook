@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    modal: null,
+    modal: false,
     contatos: [],
   },
   mutations: {
@@ -14,6 +14,9 @@ export default new Vuex.Store({
     },
     ADD_CONTATO(state, payload) {
       state.contatos.push(payload);
+    },
+    REMOVER_CONTATO(state, payload) {
+      state.contatos.splice(payload, 1);
     },
   },
   actions: {

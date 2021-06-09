@@ -1,20 +1,40 @@
 <template>
   <div id="app">
-    <HeaderInicial />
-    <Inicio />
+    <component :is="headerAtivo"></component>
+    <component :is="paginaAtiva"></component>
     <component :is="$store.state.modal"></component>
   </div>
 </template>
 
 <script>
 import HeaderInicial from "@/components/HeaderInicial.vue";
+import HeaderContatos from "@/components/HeaderContatos.vue";
 import Inicio from "@/views/Inicio.vue";
+import Contatos from "@/views/Contatos.vue";
 
 export default {
   name: "App",
   components: {
     HeaderInicial,
+    HeaderContatos,
     Inicio,
+    Contatos,
+  },
+  computed: {
+    headerAtivo() {
+      if (this.$store.state.contatos.length > 0) {
+        return "HeaderContatos";
+      } else {
+        return "HeaderInicial";
+      }
+    },
+    paginaAtiva() {
+      if (this.$store.state.contatos.length > 0) {
+        return "Contatos";
+      } else {
+        return "Inicio";
+      }
+    },
   },
 };
 </script>

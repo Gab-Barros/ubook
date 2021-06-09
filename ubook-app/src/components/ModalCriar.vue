@@ -22,7 +22,6 @@
             v-if="contato.nome || contato.email || contato.telefone"
             class="btn-salvar"
             @click.prevent="salvarContato"
-            disabled
           >
             Salvar
           </button>
