@@ -1,17 +1,26 @@
 <template>
-  <section class="modal-container">
-    <div class="modal">
+  <section class="modal-container" @click="cliqueFora">
+    <div class="modal" :class="{ active: $store.state.modal }">
       <p>Criar novo contato</p>
       <form>
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" />
+        <input type="text" name="nome" id="nome" v-model="contato.nome" />
         <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" v-model="contato.email" />
         <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" id="telefone" />
+        <input
+          type="text"
+          name="telefone"
+          id="telefone"
+          v-model="contato.telefone"
+        />
         <div class="btns">
-          <button class="btn-cancelar" @click.prevent>Cancelar</button>
-          <button class="btn-salvar" @click.prevent>Salvar</button>
+          <button class="btn-cancelar" @click.prevent="fecharModal">
+            Cancelar
+          </button>
+          <button class="btn-salvar" @click.prevent="salvarContato">
+            Salvar
+          </button>
         </div>
       </form>
     </div>
@@ -21,6 +30,22 @@
 <script>
 export default {
   name: "ModalCriar",
+  data() {
+    return {
+      contato: {},
+    };
+  },
+  methods: {
+    fecharModal() {
+      this.$store.commit("ATIVAR_MODAL", false);
+    },
+    cliqueFora(e) {
+      e.target === e.currentTarget ? this.fecharModal() : undefined;
+    },
+    salvarContato() {
+      this.$store.dispatch("salvarContato", this.contato);
+    },
+  },
 };
 </script>
 
@@ -63,6 +88,21 @@ export default {
   padding: 10px 20px;
   position: relative;
   border-radius: 8px;
+}
+
+.modal.active {
+  animation: fade 0.5s forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
 
 .modal p {

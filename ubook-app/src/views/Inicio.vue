@@ -6,7 +6,9 @@
       </div>
       <div>
         <p>Nenhum contato foi adicionado ainda</p>
-        <button class="btn"><span class="cross">+</span>criar contato</button>
+        <button class="btn" @click="ativarModal">
+          <span class="cross">+</span>criar contato
+        </button>
       </div>
     </div>
   </main>
@@ -15,6 +17,11 @@
 <script>
 export default {
   name: "Inicio",
+  methods: {
+    ativarModal() {
+      this.$store.commit("ATIVAR_MODAL", "ModalCriar");
+    },
+  },
 };
 </script>
 

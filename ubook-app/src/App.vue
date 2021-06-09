@@ -2,7 +2,7 @@
   <div id="app">
     <HeaderInicial />
     <Inicio />
-    <ModalCriar />
+    <component :is="$store.state.modal"></component>
   </div>
 </template>
 
@@ -89,7 +89,6 @@ body {
 body,
 h1,
 h2,
-input,
 button,
 span,
 p {
